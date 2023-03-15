@@ -1,0 +1,45 @@
+def solution(str1, str2):
+    # 자카드 유사도 = (A n B) / (A u B)
+    # A = 0 && B = 0 -> 1
+    #
+    str1 = str1.upper()
+    str2 = str2.upper()
+    A = {}
+    B = {}
+    for i in range(len(str1)-1):
+        if str1[i].isalpha() and str1[i+1].isalpha():
+            e = str1[i] + str1[i+1]
+            if A.get(e) == None: # 
+                A[e] = 1
+            else:
+                A[e] = A[e] + 1
+
+    for i in range(len(str2)-1):
+        if str2[i].isalpha() and str2[i+1].isalpha():
+            e = str2[i] + str2[i+1]
+            if B.get(e) == None: # 
+                B[e] = 1
+            else:
+                B[e] = B[e] + 1
+    print(A, B)
+    AnB = 0
+    AuB = 0
+    for a in A:
+        if a in B: # a의 원소가 B에 존재한다면
+            AnB += min(A[a], B[a])
+            AuB += max(A[a], B[a])
+        else:
+            AuB += A[a]
+    for b in B:
+        if b not in A:
+            AuB += B[b]
+
+    #print(A,B)
+    #print(AnB, AuB) # 
+    JAB = 0
+    if AnB == 0 and AuB == 0:
+        JAB = 1
+    else:
+        JAB = AnB / AuB
+
+    return int(65536 * JAB)
