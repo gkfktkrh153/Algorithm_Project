@@ -29,7 +29,6 @@ public class 점프점프 {
         visited[root.idx] = true;
 
         queue.offer(root);
-
         while(!queue.isEmpty()) {
 
             nTime tmp = queue.poll();
